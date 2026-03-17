@@ -10,7 +10,8 @@ Each template is a completely self-contained HTML file with no build step requir
 
 | Template | File | Style | Primary Color |
 |---|---|---|---|
-| **Cloud Nine Smoke Shop** | `sites/cloud-nine-smoke-shop.html` | Dark stone (Flava Depot-inspired) | Purple `#7c3aed` |
+| **Cloud Nine Smoke Shop** | `sites/cloud-nine-smoke-shop.html` | Dark stone (Premium) | Purple `#7c3aed` |
+| **Verdant Smoke Shop** | `sites/verdant-smoke-shop.html` | Light organic (Eco-conscious) | Green `#16a34a` |
 
 ---
 

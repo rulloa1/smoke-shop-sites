@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verdant Smoke Shop | Natural & Organic Products</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sage: {
+              50: '#f8faf6',
+              100: '#f0f4ed',
+              200: '#dfe8d9',
+              300: '#cdd8c5',
+              400: '#a8bfa0',
+              500: '#7fa67a',
+              600: '#5d8d5e',
+              700: '#4a7149',
+              800: '#3a5839',
+              900: '#2d452d',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================
+       VERDANT SMOKE SHOP — THEME CONFIGURATION
+       To change the brand color, edit --primary-color below.
+       Current: #16a34a (green — natural, organic, hemp-forward)
+       ============================================ */
+    :root {
+      --primary-color: #16a34a;
+      --primary-hover: #15803d;
+      --primary-light: rgba(22, 163, 74, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8faf6;
+      color: #2d452d;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Primary color utilities */
+    .btn-primary {
+      background-color: var(--primary-color) !important;
+      color: #fff !important;
+      transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    }
+    .btn-primary:hover {
+      background-color: var(--primary-hover) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 25px rgba(22, 163, 74, 0.25);
+    }
+
+    .btn-outline {
+      border: 1.5px solid var(--primary-color) !important;
+      color: var(--primary-color) !important;
+      background: transparent !important;
+      transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+    }
+    .btn-outline:hover {
+      background-color: var(--primary-light) !important;
+      transform: translateY(-1px);
+    }
+
+    .text-primary { color: var(--primary-color) !important; }
+    .border-primary { border-color: var(--primary-color) !important; }
+    .bg-primary-light { background-color: var(--primary-light) !important; }
+
+    /* Backdrop blur for header */
+    .backdrop-blur-header {
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    /* Star rating */
+    .stars { color: #d97706; letter-spacing: 2px; }
+
+    /* Service card hover */
+    .service-card {
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .service-card:hover {
+      border-color: var(--primary-color) !important;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(22, 163, 74, 0.15);
+    }
+
+    /* Review card hover */
+    .review-card {
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+    .review-card:hover {
+      border-color: var(--primary-color) !important;
+      transform: translateY(-3px);
+    }
+
+    /* Mobile nav toggle */
+    .mobile-menu { display: none; }
+    .mobile-menu.open { display: flex; }
+
+    /* Leaf pattern background */
+    .leaf-pattern {
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(22, 163, 74, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(22, 163, 74, 0.02) 0%, transparent 50%);
+    }
+  </style>
+</head>
+<body class="bg-sage-50 text-sage-900 min-h-screen flex flex-col leaf-pattern">
+
+  <!-- ============================================================
+       STICKY HEADER
+       ============================================================ -->
+  <header class="sticky top-0 z-50 w-full border-b border-sage-200 backdrop-blur-header" style="background-color: rgba(248, 250, 246, 0.85);">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+      <!-- Brand -->
+      <a href="#" class="flex items-center gap-2 text-sage-900 font-bold text-xl tracking-tight">
+        <!-- Leaf icon SVG -->
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: var(--primary-color);">
+          <path d="M12 22c0-6-4-10-9-10 0 5 4 9 9 10z" fill="currentColor" opacity="0.3"/>
+          <path d="M12 22c0-6 4-10 9-10-1 5-4 9-9 10z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M12 22V10M12 16c-2-1-4-3-4-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M3 12c0-5 4-9 9-10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        </svg>
+        Verdant
+        <span class="hidden sm:inline text-sage-600 font-normal text-base">Smoke Shop</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-sage-700">
+        <a href="#services" class="hover:text-sage-900 transition-colors">Products</a>
+        <a href="#about" class="hover:text-sage-900 transition-colors">About</a>
+        <a href="#about" class="hover:text-sage-900 transition-colors">Hours</a>
+        <a href="#contact" class="hover:text-sage-900 transition-colors">Contact</a>
+      </nav>
+
+      <!-- CTA Button -->
+      <div class="hidden md:flex items-center gap-3">
+        <a href="tel:5551234567" class="btn-primary px-5 py-2 rounded-full text-sm font-semibold">
+          📞 Call Us
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden p-2 rounded-lg text-sage-700 hover:text-sage-900 hover:bg-sage-200 transition-colors"
+        aria-label="Open menu"
+        onclick="document.getElementById('mobile-nav').classList.toggle('open')"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Nav Dropdown -->
+    <div id="mobile-nav" class="mobile-menu md:hidden flex-col gap-1 px-6 pb-4 border-t border-sage-200 bg-sage-50 text-sage-700 text-sm font-medium">
+      <a href="#services" class="block py-2 hover:text-sage-900" onclick="this.closest('#mobile-nav').classList.remove('open')">Products</a>
+      <a href="#about" class="block py-2 hover:text-sage-900" onclick="this.closest('#mobile-nav').classList.remove('open')">About</a>
+      <a href="#about" class="block py-2 hover:text-sage-900" onclick="this.closest('#mobile-nav').classList.remove('open')">Hours</a>
+      <a href="#contact" class="block py-2 hover:text-sage-900" onclick="this.closest('#mobile-nav').classList.remove('open')">Contact</a>
+      <a href="tel:5551234567" class="block mt-2 btn-primary text-center px-5 py-2 rounded-full font-semibold">📞 Call Us</a>
+    </div>
+  </header>
+
+  <main class="flex-1 w-full">
+
+    <!-- ============================================================
+         HERO SECTION
+         ============================================================ -->
+    <section class="relative overflow-hidden w-full bg-sage-50 py-32 sm:py-44">
+      <!-- Radial gradient background -->
+      <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 80% 60% at 20% 20%, rgba(22, 163, 74, 0.08) 0%, rgba(248, 250, 246, 0.5) 50%, #f8faf6 80%);"></div>
+      <!-- Subtle leaf pattern overlay -->
+      <div class="absolute inset-0 pointer-events-none opacity-3" style="background-image: linear-gradient(45deg, rgba(22, 163, 74, 0.1) 1px, transparent 1px), linear-gradient(-45deg, rgba(22, 163, 74, 0.1) 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+      <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+        <!-- Location badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-sage-300 bg-sage-100/60 text-sage-700 text-xs font-semibold uppercase tracking-widest mb-8">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="color: var(--primary-color);">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+          Portland, Oregon
+        </div>
+
+        <!-- Headline -->
+        <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-sage-900 leading-[1.08] mb-6">
+          Natural & Organic
+          <span class="block mt-1" style="color: var(--primary-color);">Smoke Products</span>
+        </h1>
+
+        <!-- Subheadline -->
+        <p class="text-lg sm:text-xl text-sage-700 max-w-2xl mx-auto mb-10 leading-relaxed">
+          Verdant specializes in organic, sustainably-sourced smoking accessories, premium hemp products, and eco-friendly alternatives. 
+          Conscious choices. Pure quality. A community of mindful consumers.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#contact" class="btn-primary px-8 py-4 rounded-full text-base font-semibold inline-flex items-center justify-center gap-2">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+            Visit Us Today
+          </a>
+          <a href="#services" class="btn-outline px-8 py-4 rounded-full text-base font-semibold inline-flex items-center justify-center gap-2">
+            Explore Products
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Trust badges -->
+        <div class="flex flex-wrap justify-center gap-6 mt-14 text-sage-600 text-xs font-medium uppercase tracking-widest">
+          <span class="flex items-center gap-1.5">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20" style="color: var(--primary-color);"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            100% Organic
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20" style="color: var(--primary-color);"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            Eco-Friendly
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20" style="color: var(--primary-color);"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            Community Driven
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SERVICES SECTION
+         ============================================================ -->
+    <section id="services" class="py-24 w-full bg-white border-t border-sage-200">
+      <div class="max-w-7xl mx-auto px-6">
+
+        <!-- Section header -->
+        <div class="text-center mb-14">
+          <p class="text-xs font-bold uppercase tracking-widest mb-3" style="color: var(--primary-color);">Our Selection</p>
+          <h2 class="text-3xl sm:text-4xl font-bold text-sage-900">Sustainably Sourced Products</h2>
+          <p class="text-sage-600 mt-3 max-w-xl mx-auto text-base">From organic rolling papers to biodegradable accessories — every product aligns with our values.</p>
+        </div>
+
+        <!-- 4-card grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <!-- Card 1: Organic Hemp -->
+          <div class="service-card rounded-2xl border border-sage-200 bg-sage-50 p-6 flex flex-col gap-4">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-primary-light flex-shrink-0">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: var(--primary-color);">
+                <path d="M12 22c0-6-4-10-9-10 0 5 4 9 9 10z" fill="currentColor" opacity="0.3"/>
+                <path d="M12 22c0-6 4-10 9-10-1 5-4 9-9 10z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <path d="M12 22V10M12 16c-2-1-4-3-4-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M3 12c0-5 4-9 9-10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-sage-900 font-bold text-lg mb-2">Organic Hemp</h3>
+              <p class="text-sage-600 text-sm leading-relaxed">Premium hemp flower, CBD products, and hemp-based accessories. All organically grown and lab-tested.</p>
+            </div>
+          </div>
+
+          <!-- Card 2: Eco Glass -->
+          <div class="service-card rounded-2xl border border-sage-200 bg-sage-50 p-6 flex flex-col gap-4">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-primary-light flex-shrink-0">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: var(--primary-color);">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
+                <circle cx="9" cy="9" r="2" fill="currentColor" opacity="0.4"/>
+                <circle cx="14" cy="14" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <circle cx="8" cy="14" r="1.2" fill="currentColor" opacity="0.6"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-sage-900 font-bold text-lg mb-2">Eco Glass</h3>
+              <p class="text-sage-600 text-sm leading-relaxed">Hand-blown borosilicate glass from sustainable artisans. Durable, recyclable, and beautifully crafted.</p>
+            </div>
+          </div>
+
+          <!-- Card 3: Natural Papers -->
+          <div class="service-card rounded-2xl border border-sage-200 bg-sage-50 p-6 flex flex-col gap-4">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-primary-light flex-shrink-0">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: var(--primary-color);">
+                <path d="M7 3h10a2 2 0 012 2v14a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2z" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M9 7h6M9 11h6M9 15h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-sage-900 font-bold text-lg mb-2">Natural Papers</h3>
+              <p class="text-sage-600 text-sm leading-relaxed">Organic, chlorine-free rolling papers and wraps. Made from sustainably harvested plant fibers.</p>
+            </div>
+          </div>
+
+          <!-- Card 4: Accessories -->
+          <div class="service-card rounded-2xl border border-sage-200 bg-sage-50 p-6 flex flex-col gap-4">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-primary-light flex-shrink-0">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: var(--primary-color);">
+                <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.4"/>
+                <path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity="0.6"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-sage-900 font-bold text-lg mb-2">Eco Accessories</h3>
+              <p class="text-sage-600 text-sm leading-relaxed">Bamboo grinders, compostable filters, and sustainable storage. Mindful choices for conscious users.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ABOUT & HOURS SECTION
+         ============================================================ -->
+    <section id="about" class="py-24 w-full bg-sage-50">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+          <!-- Left: About text -->
+          <div>
+            <p class="text-xs font-bold uppercase tracking-widest mb-3" style="color: var(--primary-color);">Our Mission</p>
+            <h2 class="text-3xl sm:text-4xl font-bold text-sage-900 mb-6">Conscious Commerce for a Better World</h2>
+            <p class="text-sage-700 text-base leading-relaxed mb-5">
+              Verdant Smoke Shop exists to prove that smoking culture and environmental responsibility can coexist. We've built our business on the belief that every purchase is a vote for the kind of world we want to live in.
+            </p>
+            <p class="text-sage-700 text-base leading-relaxed mb-8">
+              Every product in our store has been vetted for sustainability, ethical sourcing, and quality. We partner with small-scale producers, support fair-trade practices, and donate a portion of profits to environmental conservation efforts. When you shop with us, you're joining a movement.
+            </p>
+
+            <!-- Feature list -->
+            <ul class="space-y-3 mb-10">
+              <li class="flex items-start gap-3 text-sage-700 text-sm">
+                <svg class="flex-shrink-0 mt-0.5" width="18" height="18" fill="currentColor" viewBox="0 0 20 20" style="color: var(--primary-color);"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                100% of products are organic or sustainably sourced
+              </li>
+              <li class="flex items-start gap-3 text-sage-700 text-sm">
+                <svg class="flex-shrink-0 mt-0.5" width="18" height="18" fill="currentColor" viewBox="0 0 20 20" style="color: var(--primary-color);"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                5% of profits support environmental nonprofits
+              </li>
+              <li class="flex items-start gap-3 text-sage-700 text-sm">
+                <svg class="flex-shrink-0 mt-0.5" width="18" height="18" fill="currentColor" viewBox="0 0 20 20" style="color: var(--primary-color);"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                Plastic-free packaging on all products
+              </li>
+              <li class="flex items-start gap-3 text-sage-700 text-sm">
+                <svg class="flex-shrink-0 mt-0.5" width="18" height="18" fill="currentColor" viewBox="0 0 20 20" style="color: var(--primary-color);"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                Community education on sustainable practices
+              </li>
+            </ul>
+
+            <a href="tel:5551234567" class="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+              Call (555) 123-4567
+            </a>
+          </div>
+
+          <!-- Right: Hours + Info card -->
+          <div class="flex flex-col gap-6">
+
+            <!-- Hours card -->
+            <div class="rounded-2xl border border-sage-200 bg-white p-8">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center bg-primary-light">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="color: var(--primary-color);">
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <h3 class="text-sage-900 font-bold text-lg">Store Hours</h3>
+              </div>
+              <div class="space-y-3">
+                <div class="flex justify-between items-center py-2 border-b border-sage-200">
+                  <span class="text-sage-600 text-sm">Monday – Saturday</span>
+                  <span class="text-sage-900 font-semibold text-sm">10:00 AM – 8:00 PM</span>
+                </div>
+                <div class="flex justify-between items-center py-2">
+                  <span class="text-sage-600 text-sm">Sunday</span>
+                  <span class="text-sage-900 font-semibold text-sm">12:00 PM – 6:00 PM</span>
+                </div>
+              </div>
+              <div class="mt-5 pt-4 border-t border-sage-200 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                <span class="text-green-600 text-xs font-semibold">Open Today</span>
+              </div>
+            </div>
+
+            <!-- Location card -->
+            <div class="rounded-2xl border border-sage-200 bg-white p-8">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center bg-primary-light">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--primary-color);">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                  </svg>
+                </div>
+                <h3 class="text-sage-900 font-bold text-lg">Find Us</h3>
+              </div>
+              <p class="text-sage-800 font-medium mb-1">456 Green Ave</p>
+              <p class="text-sage-600 text-sm mb-6">Portland, OR 97214</p>
+              <a
+                href="https://maps.google.com/?q=456+Green+Ave+Portland+OR"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-primary w-full text-center px-5 py-3 rounded-xl text-sm font-semibold inline-flex items-center justify-center gap-2"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                Get Directions
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         REVIEWS SECTION
+         ============================================================ -->
+    <section class="py-24 w-full bg-white border-t border-sage-200">
+      <div class="max-w-7xl mx-auto px-6">
+
+        <!-- Section header -->
+        <div class="text-center mb-14">
+          <p class="text-xs font-bold uppercase tracking-widest mb-3" style="color: var(--primary-color);">Community Voices</p>
+          <h2 class="text-3xl sm:text-4xl font-bold text-sage-900">What Our Customers Say</h2>
+          <p class="text-sage-600 mt-3 max-w-xl mx-auto text-base">Join thousands of conscious consumers who've made Verdant their trusted source.</p>
+        </div>
+
+        <!-- 3-column review grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- Review 1 -->
+          <div class="review-card rounded-2xl bg-sage-50 border border-sage-200 p-7 flex flex-col gap-4">
+            <div class="stars text-lg">★★★★★</div>
+            <p class="text-sage-700 text-sm leading-relaxed flex-1">
+              "Finally a smoke shop that aligns with my values. Everything is organic, the packaging is compostable, and the staff genuinely cares about sustainability."
+            </p>
+            <div class="pt-4 border-t border-sage-200 flex items-center justify-between">
+              <div>
+                <p class="text-sage-900 font-semibold text-sm">Alex M.</p>
+                <p class="text-sage-500 text-xs mt-0.5">Verified Customer</p>
+              </div>
+              <span class="text-sage-500 text-xs">2 weeks ago</span>
+            </div>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="review-card rounded-2xl bg-sage-50 border border-sage-200 p-7 flex flex-col gap-4">
+            <div class="stars text-lg">★★★★★</div>
+            <p class="text-sage-700 text-sm leading-relaxed flex-1">
+              "Love knowing that my purchases support environmental causes. The quality is premium and the prices are fair. This is the future of retail."
+            </p>
+            <div class="pt-4 border-t border-sage-200 flex items-center justify-between">
+              <div>
+                <p class="text-sage-900 font-semibold text-sm">Jordan T.</p>
+                <p class="text-sage-500 text-xs mt-0.5">Verified Customer</p>
+              </div>
+              <span class="text-sage-500 text-xs">1 month ago</span>
+            </div>
+          </div>
+
+          <!-- Review 3 -->
+          <div class="review-card rounded-2xl bg-sage-50 border border-sage-200 p-7 flex flex-col gap-4">
+            <div class="stars text-lg">★★★★★</div>
+            <p class="text-sage-700 text-sm leading-relaxed flex-1">
+              "The hemp selection is incredible and everything is lab-tested. Staff are knowledgeable and passionate. Highly recommend for anyone serious about quality."
+            </p>
+            <div class="pt-4 border-t border-sage-200 flex items-center justify-between">
+              <div>
+                <p class="text-sage-900 font-semibold text-sm">Casey R.</p>
+                <p class="text-sage-500 text-xs mt-0.5">Verified Customer</p>
+              </div>
+              <span class="text-sage-500 text-xs">1 month ago</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Overall rating bar -->
+        <div class="mt-12 text-center">
+          <div class="inline-flex items-center gap-3 bg-sage-50 border border-sage-200 rounded-2xl px-8 py-4">
+            <span class="text-4xl font-extrabold text-sage-900">4.9</span>
+            <div class="text-left">
+              <div class="stars text-xl">★★★★★</div>
+              <p class="text-sage-500 text-xs mt-1">Based on Customer Reviews</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT / CTA SECTION
+         ============================================================ -->
+    <section id="contact" class="py-24 w-full bg-sage-50 relative overflow-hidden">
+      <!-- Gradient overlay -->
+      <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(22, 163, 74, 0.08) 0%, transparent 70%);"></div>
+
+      <div class="relative z-10 max-w-4xl mx-auto px-6">
+
+        <div class="rounded-3xl border border-sage-200 bg-white p-10 sm:p-14 text-center">
+          <p class="text-xs font-bold uppercase tracking-widest mb-3" style="color: var(--primary-color);">Join Our Community</p>
+          <h2 class="text-3xl sm:text-4xl font-bold text-sage-900 mb-4">Ready to Shop Consciously?</h2>
+          <p class="text-sage-700 text-base leading-relaxed max-w-xl mx-auto mb-10">
+            Visit Verdant and discover the difference quality and sustainability make. Our team is ready to help you find exactly what you're looking for.
+          </p>
+
+          <!-- Contact info -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+            <div class="flex flex-col items-center gap-2 p-5 rounded-xl bg-sage-50 border border-sage-200">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="color: var(--primary-color);">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+              <p class="text-sage-600 text-xs uppercase tracking-widest font-semibold">Address</p>
+              <p class="text-sage-900 text-sm font-medium text-center">456 Green Ave<br>Portland, OR 97214</p>
+            </div>
+            <div class="flex flex-col items-center gap-2 p-5 rounded-xl bg-sage-50 border border-sage-200">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="color: var(--primary-color);">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+              <p class="text-sage-600 text-xs uppercase tracking-widest font-semibold">Phone</p>
+              <a href="tel:5551234567" class="text-sage-900 text-sm font-medium hover:text-primary transition-colors">(555) 123-4567</a>
+            </div>
+            <div class="flex flex-col items-center gap-2 p-5 rounded-xl bg-sage-50 border border-sage-200">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="color: var(--primary-color);">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <p class="text-sage-600 text-xs uppercase tracking-widest font-semibold">Hours</p>
+              <p class="text-sage-900 text-sm font-medium text-center">Mon–Sat: 10am–8pm<br>Sun: 12pm–6pm</p>
+            </div>
+          </div>
+
+          <!-- Action buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://maps.google.com/?q=456+Green+Ave+Portland+OR"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-primary px-8 py-4 rounded-full text-base font-semibold inline-flex items-center justify-center gap-2"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+              Get Directions
+            </a>
+            <a href="tel:5551234567" class="btn-outline px-8 py-4 rounded-full text-base font-semibold inline-flex items-center justify-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+              Call Us Now
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="border-t border-sage-200 bg-sage-50 text-sage-600 py-14">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+
+        <!-- Column 1: Brand + tagline -->
+        <div>
+          <div class="flex items-center gap-2 text-sage-900 font-bold text-lg mb-3">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="color: var(--primary-color);">
+              <path d="M12 22c0-6-4-10-9-10 0 5 4 9 9 10z" fill="currentColor" opacity="0.3"/>
+              <path d="M12 22c0-6 4-10 9-10-1 5-4 9-9 10z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              <path d="M12 22V10M12 16c-2-1-4-3-4-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M3 12c0-5 4-9 9-10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            </svg>
+            Verdant Smoke Shop
+          </div>
+          <p class="text-sage-600 text-sm leading-relaxed">
+            Organic, sustainable, and community-driven. We believe conscious commerce is the future.
+          </p>
+        </div>
+
+        <!-- Column 2: Quick links -->
+        <div>
+          <h4 class="text-sage-900 font-semibold text-sm uppercase tracking-widest mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#services" class="hover:text-sage-900 transition-colors">Our Products</a></li>
+            <li><a href="#about" class="hover:text-sage-900 transition-colors">About Us</a></li>
+            <li><a href="#about" class="hover:text-sage-900 transition-colors">Store Hours</a></li>
+            <li><a href="#contact" class="hover:text-sage-900 transition-colors">Contact &amp; Location</a></li>
+            <li><a href="tel:5551234567" class="hover:text-sage-900 transition-colors">(555) 123-4567</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Hours + Location -->
+        <div>
+          <h4 class="text-sage-900 font-semibold text-sm uppercase tracking-widest mb-4">Hours &amp; Location</h4>
+          <div class="space-y-2 text-sm">
+            <p class="flex justify-between"><span class="text-sage-600">Mon – Sat</span><span class="text-sage-800">10:00 AM – 8:00 PM</span></p>
+            <p class="flex justify-between"><span class="text-sage-600">Sunday</span><span class="text-sage-800">12:00 PM – 6:00 PM</span></p>
+          </div>
+          <div class="mt-5 pt-5 border-t border-sage-200 text-sm">
+            <p class="text-sage-800 font-medium">456 Green Ave</p>
+            <p class="text-sage-600">Portland, OR 97214</p>
+            <a
+              href="https://maps.google.com/?q=456+Green+Ave+Portland+OR"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 mt-3 text-xs font-semibold uppercase tracking-widest hover:text-sage-900 transition-colors"
+              style="color: var(--primary-color);"
+            >
+              View on Maps →
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Copyright bar -->
+      <div class="pt-8 border-t border-sage-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-sage-500">
+        <p>&copy; 2026 Verdant Smoke Shop. All rights reserved.</p>
+        <p>Portland, Oregon · <a href="tel:5551234567" class="hover:text-sage-700 transition-colors">(555) 123-4567</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

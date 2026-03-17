@@ -9,20 +9,105 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
+    
+    /* Enhanced card hover with smooth transitions */
     .card-hover {
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                  box-shadow 0.3s ease, 
+                  border-color 0.3s ease;
     }
     .card-hover:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
       border-color: #7c3aed !important;
+    }
+
+    /* Smooth fade-in animation for cards */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card-animate {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .card-animate:nth-child(1) { animation-delay: 0.1s; }
+    .card-animate:nth-child(2) { animation-delay: 0.2s; }
+    .card-animate:nth-child(3) { animation-delay: 0.3s; }
+
+    /* Copy button styles */
+    .copy-btn {
+      opacity: 0;
+      transition: opacity 0.2s ease, background-color 0.2s ease;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+    }
+
+    .copy-btn:hover {
+      background: rgba(0, 0, 0, 0.9);
+    }
+
+    .copy-btn.copied {
+      background: #16a34a;
+    }
+
+    .card-hover:hover .copy-btn {
+      opacity: 1;
+    }
+
+    /* Smooth scroll behavior */
+    html { scroll-behavior: smooth; }
+
+    /* Section fade-in */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    section {
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    /* Badge pulse animation */
+    @keyframes pulse-subtle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .badge-pulse {
+      animation: pulse-subtle 2s ease-in-out infinite;
+    }
+
+    /* Gradient text effect */
+    .gradient-text {
+      background: linear-gradient(135deg, #7c3aed 0%, #0ea5e9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-900 min-h-screen">
 
   <!-- Header -->
-  <header class="bg-white border-b border-gray-200 py-5 px-6">
+  <header class="bg-white border-b border-gray-200 py-5 px-6 sticky top-0 z-40 shadow-sm">
     <div class="max-w-6xl mx-auto flex items-center justify-between">
       <div>
         <h1 class="text-xl font-bold text-gray-900">🏪 Smoke Shop Demo Sites</h1>
@@ -47,9 +132,9 @@
 
     <!-- Intro -->
     <div class="mb-10">
-      <h2 class="text-2xl font-bold text-gray-900 mb-2">Template Gallery</h2>
-      <p class="text-gray-500 text-base">
-        Each template is a single self-contained HTML file. Click a card to preview, or open the file directly in your browser.
+      <h2 class="text-3xl font-bold text-gray-900 mb-2">Template Gallery</h2>
+      <p class="text-gray-600 text-base">
+        Each template is a single self-contained HTML file. Click a card to preview, or use the copy button to grab the code. No build step required.
       </p>
     </div>
 
@@ -57,7 +142,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
 
       <!-- Card: Cloud Nine Smoke Shop -->
-      <div class="card-hover bg-white rounded-2xl border border-gray-200 overflow-hidden flex flex-col">
+      <div class="card-hover card-animate bg-white rounded-2xl border border-gray-200 overflow-hidden flex flex-col relative group">
 
         <!-- Preview thumbnail (dark theme preview) -->
         <div class="w-full h-44 bg-stone-950 flex items-center justify-center relative overflow-hidden" style="background: #0c0a09;">
@@ -79,6 +164,15 @@
             </div>
           </div>
         </div>
+
+        <!-- Copy button -->
+        <button 
+          class="copy-btn" 
+          onclick="copyTemplateCode('cloud-nine-smoke-shop.html', this)"
+          title="Copy download link"
+        >
+          📋 Copy
+        </button>
 
         <!-- Card body -->
         <div class="p-5 flex flex-col flex-1">
@@ -107,8 +201,69 @@
         </div>
       </div>
 
+      <!-- Card: Verdant Smoke Shop -->
+      <div class="card-hover card-animate bg-white rounded-2xl border border-gray-200 overflow-hidden flex flex-col relative group">
+
+        <!-- Preview thumbnail (light theme preview) -->
+        <div class="w-full h-44 bg-sage-50 flex items-center justify-center relative overflow-hidden" style="background: #f8faf6;">
+          <!-- Simulated light site preview -->
+          <div class="absolute inset-0" style="background: radial-gradient(ellipse 80% 60% at 20% 20%, rgba(22, 163, 74, 0.08) 0%, #f8faf6 70%);"></div>
+          <div class="relative z-10 text-center px-4">
+            <div class="flex items-center justify-center gap-2 mb-2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#16a34a">
+                <path d="M12 22c0-6-4-10-9-10 0 5 4 9 9 10z" fill="currentColor" opacity="0.3"/>
+                <path d="M12 22c0-6 4-10 9-10-1 5-4 9-9 10z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              </svg>
+              <span class="text-sage-900 text-sm font-bold">Verdant</span>
+            </div>
+            <p class="text-sage-600 text-xs">Light · Organic · Green</p>
+            <!-- Mini fake nav -->
+            <div class="mt-3 flex gap-3 justify-center">
+              <span class="w-12 h-1.5 rounded-full bg-sage-200"></span>
+              <span class="w-12 h-1.5 rounded-full bg-sage-200"></span>
+              <span class="w-16 h-1.5 rounded-full bg-green-600 opacity-80"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Copy button -->
+        <button 
+          class="copy-btn" 
+          onclick="copyTemplateCode('verdant-smoke-shop.html', this)"
+          title="Copy download link"
+        >
+          📋 Copy
+        </button>
+
+        <!-- Card body -->
+        <div class="p-5 flex flex-col flex-1">
+          <div class="flex items-start justify-between mb-2">
+            <h3 class="text-gray-900 font-bold text-base">Verdant Smoke Shop</h3>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-green-100 text-green-700">Light Theme</span>
+          </div>
+          <p class="text-gray-500 text-sm leading-relaxed flex-1 mb-4">
+            A sustainable, eco-conscious template for organic and natural product retailers. Features a light, botanical aesthetic with emphasis on environmental values and community.
+          </p>
+
+          <!-- Tags -->
+          <div class="flex flex-wrap gap-2 mb-5 text-xs font-medium text-gray-500">
+            <span class="px-2 py-1 bg-gray-100 rounded-md">Tailwind CSS</span>
+            <span class="px-2 py-1 bg-gray-100 rounded-md">Single File</span>
+            <span class="px-2 py-1 bg-gray-100 rounded-md">No Build Step</span>
+            <span class="px-2 py-1 bg-gray-100 rounded-md">Mobile Ready</span>
+          </div>
+
+          <a
+            href="sites/verdant-smoke-shop.html"
+            class="block w-full text-center bg-gray-900 hover:bg-gray-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-colors"
+          >
+            Open Demo →
+          </a>
+        </div>
+      </div>
+
       <!-- Placeholder card: Coming Soon -->
-      <div class="bg-white rounded-2xl border border-dashed border-gray-300 flex flex-col items-center justify-center p-10 text-center min-h-[320px]">
+      <div class="card-animate bg-white rounded-2xl border border-dashed border-gray-300 flex flex-col items-center justify-center p-10 text-center min-h-[320px] hover:border-gray-400 transition-colors">
         <div class="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center mb-4">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="12" y1="5" x2="12" y2="19"/>
@@ -122,30 +277,109 @@
     </div>
 
     <!-- How to use -->
-    <div class="mt-14 bg-white rounded-2xl border border-gray-200 p-8">
+    <div class="mt-16 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl border border-blue-200 p-8">
       <h3 class="text-gray-900 font-bold text-lg mb-4">⚡ How to Use These Templates</h3>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-600">
         <div>
-          <div class="font-bold text-gray-800 mb-1">1. Open in Browser</div>
-          <p>Double-click any <code class="bg-gray-100 px-1.5 py-0.5 rounded text-xs font-mono">.html</code> file in the <code class="bg-gray-100 px-1.5 py-0.5 rounded text-xs font-mono">sites/</code> folder. No server needed.</p>
+          <div class="font-bold text-gray-800 mb-1 flex items-center gap-2">
+            <span class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-600 text-white text-xs">1</span>
+            Open in Browser
+          </div>
+          <p>Double-click any <code class="bg-white px-1.5 py-0.5 rounded text-xs font-mono border border-gray-200">.html</code> file in the <code class="bg-white px-1.5 py-0.5 rounded text-xs font-mono border border-gray-200">sites/</code> folder. No server needed.</p>
         </div>
         <div>
-          <div class="font-bold text-gray-800 mb-1">2. Customize</div>
-          <p>Edit the business name, address, phone, hours, and <code class="bg-gray-100 px-1.5 py-0.5 rounded text-xs font-mono">--primary-color</code> CSS var at the top of the file.</p>
+          <div class="font-bold text-gray-800 mb-1 flex items-center gap-2">
+            <span class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-600 text-white text-xs">2</span>
+            Customize
+          </div>
+          <p>Edit the business name, address, phone, hours, and <code class="bg-white px-1.5 py-0.5 rounded text-xs font-mono border border-gray-200">--primary-color</code> CSS var at the top of the file.</p>
         </div>
         <div>
-          <div class="font-bold text-gray-800 mb-1">3. Share Demo Link</div>
-          <p>Drop the file on <a href="https://app.netlify.com/drop" target="_blank" class="text-blue-600 hover:underline">Netlify Drop</a> for a shareable URL to send to the client.</p>
+          <div class="font-bold text-gray-800 mb-1 flex items-center gap-2">
+            <span class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-600 text-white text-xs">3</span>
+            Share Demo Link
+          </div>
+          <p>Drop the file on <a href="https://app.netlify.com/drop" target="_blank" class="text-blue-600 hover:underline font-medium">Netlify Drop</a> for a shareable URL to send to the client.</p>
         </div>
+      </div>
+    </div>
+
+    <!-- Features section -->
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-white rounded-xl border border-gray-200 p-6">
+        <h4 class="font-bold text-gray-900 mb-3 flex items-center gap-2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-green-600">
+            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+          </svg>
+          What's Included
+        </h4>
+        <ul class="space-y-2 text-sm text-gray-600">
+          <li>✓ Fully responsive design (mobile, tablet, desktop)</li>
+          <li>✓ Hero section with CTAs</li>
+          <li>✓ Services/products grid</li>
+          <li>✓ About & hours section</li>
+          <li>✓ Customer reviews carousel</li>
+          <li>✓ Contact & location info</li>
+        </ul>
+      </div>
+      <div class="bg-white rounded-xl border border-gray-200 p-6">
+        <h4 class="font-bold text-gray-900 mb-3 flex items-center gap-2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-purple-600">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+          </svg>
+          Customization
+        </h4>
+        <ul class="space-y-2 text-sm text-gray-600">
+          <li>✓ Change business name & details</li>
+          <li>✓ Swap primary color with one CSS variable</li>
+          <li>✓ Edit services, products, reviews</li>
+          <li>✓ Update contact info & hours</li>
+          <li>✓ No build tools or dependencies</li>
+          <li>✓ Deploy instantly to any host</li>
+        </ul>
       </div>
     </div>
 
   </main>
 
   <!-- Footer -->
-  <footer class="border-t border-gray-200 py-8 text-center text-gray-400 text-xs mt-8">
-    <p>Smoke Shop Demo Sites · <a href="https://github.com/rulloa1/smoke-shop-sites" target="_blank" class="hover:text-gray-600 transition-colors">GitHub</a></p>
+  <footer class="border-t border-gray-200 py-8 text-center text-gray-400 text-xs mt-16">
+    <p>Smoke Shop Demo Sites · <a href="https://github.com/rulloa1/smoke-shop-sites" target="_blank" class="hover:text-gray-600 transition-colors font-medium">GitHub</a> · Made with ❤️ for smoke shop owners</p>
   </footer>
+
+  <script>
+    function copyTemplateCode(filename, button) {
+      const baseUrl = window.location.origin + window.location.pathname.replace('index.html', '');
+      const fileUrl = baseUrl + 'sites/' + filename;
+      
+      // Copy to clipboard
+      navigator.clipboard.writeText(fileUrl).then(() => {
+        const originalText = button.textContent;
+        button.textContent = '✓ Copied!';
+        button.classList.add('copied');
+        
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy:', err);
+        alert('Copy failed. URL: ' + fileUrl);
+      });
+    }
+
+    // Add stagger animation to cards on load
+    window.addEventListener('load', () => {
+      const cards = document.querySelectorAll('.card-animate');
+      cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+          card.style.animation = `fadeInUp 0.6s ease-out ${index * 0.1}s forwards`;
+        }, 50);
+      });
+    });
+  </script>
 
 </body>
 </html>
