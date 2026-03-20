@@ -24,47 +24,66 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     /* ============================================
-       CLOUD NINE SMOKE SHOP — THEME CONFIGURATION
-       To change the brand color, edit --primary-color below.
-       Current: #7c3aed (violet/purple — premium smoky feel)
+       PREMIUM THEME & ANIMATIONS
        ============================================ */
     :root {
-      --primary-color: #7c3aed;
-      --primary-hover: #6d28d9;
-      --primary-light: rgba(124, 58, 237, 0.15);
+      --primary-color: #8b5cf6; /* A slightly softer, more modern violet */
+      --primary-hover: #7c3aed;
+      --primary-light: rgba(139, 92, 246, 0.1);
+      --bg-dark: #0a0a0a;
+      --bg-light: #121212;
+      --text-main: #e5e5e5;
+      --text-muted: #a3a3a3;
+      --border-color: #262626;
     }
 
     * { box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #0c0a09;
-      color: #fafaf9;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out forwards;
     }
 
     /* Primary color utilities */
     .btn-primary {
       background-color: var(--primary-color) !important;
       color: #fff !important;
-      transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
     }
     .btn-primary:hover {
       background-color: var(--primary-hover) !important;
-      transform: translateY(-1px);
-      box-shadow: 0 8px 25px rgba(124, 58, 237, 0.35);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
     }
 
     .btn-outline {
-      border: 1.5px solid var(--primary-color) !important;
-      color: var(--primary-color) !important;
+      border: 1.5px solid var(--border-color) !important;
+      color: var(--text-main) !important;
       background: transparent !important;
-      transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+      transition: all 0.3s ease;
     }
     .btn-outline:hover {
-      background-color: var(--primary-light) !important;
-      transform: translateY(-1px);
+      background-color: var(--primary-color) !important;
+      border-color: var(--primary-color) !important;
+      color: #fff !important;
+      transform: translateY(-2px);
     }
 
     .text-primary { color: var(--primary-color) !important; }
@@ -73,35 +92,49 @@
 
     /* Backdrop blur for header */
     .backdrop-blur-header {
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      background-color: rgba(18, 18, 18, 0.8) !important;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
 
     /* Star rating */
-    .stars { color: #f59e0b; letter-spacing: 2px; }
+    .stars { color: #facc15; letter-spacing: 2px; }
 
     /* Service card hover */
     .service-card {
-      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      background-color: var(--bg-light);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
     }
     .service-card:hover {
       border-color: var(--primary-color) !important;
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(124, 58, 237, 0.2);
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
     }
 
     /* Review card hover */
     .review-card {
-      transition: border-color 0.25s ease, transform 0.25s ease;
+      background-color: var(--bg-light);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
     }
     .review-card:hover {
       border-color: var(--primary-color) !important;
-      transform: translateY(-3px);
+      transform: translateY(-4px);
     }
 
     /* Mobile nav toggle */
     .mobile-menu { display: none; }
     .mobile-menu.open { display: flex; }
+
+    /* Add JS for scroll animations */
+    .js-scroll {
+      opacity: 0;
+      transition: opacity 0.8s ease-out;
+    }
+    .js-scroll.scrolled {
+      opacity: 1;
+    }
   </style>
 </head>
 <body class="bg-stone-950 text-stone-50 min-h-screen flex flex-col">
@@ -235,7 +268,7 @@
     <!-- ============================================================
          SERVICES SECTION
          ============================================================ -->
-    <section id="services" class="py-24 w-full bg-stone-900 border-t border-stone-800">
+    <section id="services" class="py-24 w-full bg-stone-900 border-t border-stone-800 js-scroll">
       <div class="max-w-7xl mx-auto px-6">
 
         <!-- Section header -->
@@ -322,7 +355,7 @@
     <!-- ============================================================
          ABOUT & HOURS SECTION
          ============================================================ -->
-    <section id="about" class="py-24 w-full bg-stone-950">
+    <section id="about" class="py-24 w-full bg-stone-950 js-scroll">
       <div class="max-w-7xl mx-auto px-6">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
@@ -428,7 +461,7 @@
     <!-- ============================================================
          REVIEWS SECTION
          ============================================================ -->
-    <section class="py-24 w-full bg-stone-900 border-t border-stone-800">
+    <section class="py-24 w-full bg-stone-900 border-t border-stone-800 js-scroll">
       <div class="max-w-7xl mx-auto px-6">
 
         <!-- Section header -->
@@ -505,7 +538,7 @@
     <!-- ============================================================
          CONTACT / CTA SECTION
          ============================================================ -->
-    <section id="contact" class="py-24 w-full bg-stone-950 relative overflow-hidden">
+    <section id="contact" class="py-24 w-full bg-stone-950 relative overflow-hidden js-scroll">
       <!-- Gradient overlay -->
       <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(124,58,237,0.12) 0%, transparent 70%);"></div>
 
@@ -635,5 +668,34 @@
     </div>
   </footer>
 
+  <script>
+    // Scroll animation script
+    const scrollElements = document.querySelectorAll(".js-scroll");
+
+    const elementInView = (el, dividend = 1) => {
+      const elementTop = el.getBoundingClientRect().top;
+      return (
+        elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
+      );
+    };
+
+    const displayScrollElement = (element) => {
+      element.classList.add("scrolled");
+    };
+
+    const handleScrollAnimation = () => {
+      scrollElements.forEach((el) => {
+        if (elementInView(el, 1.25)) {
+          displayScrollElement(el);
+        }
+      });
+    }
+
+    window.addEventListener("scroll", () => { 
+      handleScrollAnimation();
+    });
+    // Trigger on load as well
+    handleScrollAnimation();
+  </script>
 </body>
 </html>
